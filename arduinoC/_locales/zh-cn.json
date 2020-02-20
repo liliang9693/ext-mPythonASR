@@ -1,0 +1,6 @@
+{
+    "mPythonASR.ASRStart|block": "语音识别 录音 [TIME] 秒后识别一次",
+    "mPythonASR.ASRReadResult|block": "语音识别 获取识别结果",
+    "mPythonASR.ASRCompare|block": "语音识别 结果中包含[STR]？"
+
+}

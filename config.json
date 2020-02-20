@@ -1,0 +1,34 @@
+{
+  "name": {
+    "zh-cn": "WIFI语音识别",
+    "en": "ASR module"
+  },
+  "description": {
+    "zh-cn": "需掌控板2.0,需加载WIFI模块使用。",
+    "en": "Support audio playback, audio recording, audio recognition functions"
+  },
+  "auther": "liliang",
+  "email": "969316753@qq.com",
+  "license": "MIT",
+  "isBoard": false,
+  "id": "mPythonASR",
+  "platform": [
+    "win"
+  ],
+  "asset": {
+    "arduinoC": {
+      "dir": "arduinoC/",
+      "version": "0.1.0",
+      "board": [
+        "esp32"
+      ],
+      "main": "main.ts",
+      "files": [
+        "_images/icon.svg",
+        "_locales/zh-cn.json",
+        "main.ts",
+        "libraries/libraries.zip"
+      ]
+    }
+  }
+}
