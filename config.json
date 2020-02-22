@@ -4,7 +4,7 @@
     "en": "ASR module"
   },
   "description": {
-    "zh-cn": "需掌控板2.0,需加载WIFI模块使用。",
+    "zh-cn": "需掌控板2.0,需加载WIFI模块,需V1.6.2RC2.0及以上版本。",
     "en": "Support audio playback, audio recording, audio recognition functions"
   },
   "auther": "liliang",
