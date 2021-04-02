@@ -7,28 +7,23 @@
     "zh-cn": "需掌控板2.0,需加载WIFI模块,需V1.6.2RC2.0及以上版本。",
     "en": "Support audio playback, audio recording, audio recognition functions"
   },
-  "auther": "liliang",
+  "author": "liliang",
   "email": "969316753@qq.com",
   "license": "MIT",
   "isBoard": false,
   "id": "mPythonASR",
+  "version": "0.2.0",
   "platform": [
     "win"
   ],
   "asset": {
     "arduinoC": {
       "dir": "arduinoC/",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "board": [
         "esp32"
       ],
-      "main": "main.ts",
-      "files": [
-        "_images/icon.svg",
-        "_locales/zh-cn.json",
-        "main.ts",
-        "libraries/libraries.zip"
-      ]
+      "main": "main.ts"
     }
   }
 }

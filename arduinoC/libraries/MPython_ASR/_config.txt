@@ -1,0 +1,68 @@
+static void init_i2s(renderer_config_t *config)
+{     
+    i2s_mode_t mode = I2S_MODE_MASTER;
+
+    if (config->mode == I2S_MODE_TX)
+    {
+        mode = mode | I2S_MODE_TX;
+        #if MICROPY_BUILDIN_DAC 
+        mode = mode | I2S_MODE_DAC_BUILT_IN;
+        // ESP_LOGE(TAG, "I2S MODE IS DAC BUILT IN");
+        #endif
+    }
+    if (config->mode == I2S_MODE_RX)
+    {
+        mode = mode | I2S_MODE_RX;
+        #if MICROPY_BUILDIN_ADC
+        mode = mode | I2S_MODE_ADC_BUILT_IN;
+        // ESP_LOGE(TAG, "I2S MODE IS ADC BUILT IN");
+        #endif
+    }
+
+    /*
+     * Allocate just enough to decode AAC+, which has huge frame sizes.
+     *
+     * Memory consumption formula:
+     * (bits_per_sample / 8) * num_chan * dma_buf_count * dma_buf_len
+     *
+     * 16 bit: 32 * 256 = 8192 bytes
+     * 32 bit: 32 * 256 = 16384 bytes
+     */
+    i2s_config_t i2s_config = {
+        .mode = mode,                                 // I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN,
+        .sample_rate = config->sample_rate,           //16000 default
+        .bits_per_sample = config->bit_depth,         //16bit default
+        .channel_format = config->channel_format,     
+        .communication_format = I2S_COMM_FORMAT_I2S_MSB,
+        .dma_buf_count = 16,                           //16 32 number of buffers, 128 max.
+        .dma_buf_len = 64,                          //128 64 size of each buffer
+        .use_apll = config->use_apll,
+        .intr_alloc_flags =0 // ESP_INTR_FLAG_LEVEL1 // Interrupt level 1 ESP_INTR_FLAG_LEVEL0?
+    };
+
+
+    // i2s_driver_uninstall(I2S_USE_NUM);
+    i2s_driver_install(I2S_USE_NUM, &i2s_config, 0, NULL);
+    // ESP_LOGE(TAG, "4 i2s driver intalled, RAM left: %d", esp_get_free_heap_size());
+
+    if(config->mode == I2S_MODE_TX) 
+    {
+        #if MICROPY_BUILDIN_DAC
+        i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN);
+        // #else
+        // i2s_set_pin(I2S_USE_NUM, NULL);
+        #endif
+        i2s_zero_dma_buffer(0);
+    }
+    else if(config->mode == I2S_MODE_RX)
+    {
+        #if MICROPY_BUILDIN_ADC
+        i2s_set_adc_mode(ADC_UNIT_1, ADC1_CHANNEL_2); //renderer_instance->adc1_channel );
+        // #else
+        // i2s_set_pin(I2S_USE_NUM, NULL);
+        #endif
+    }
+
+    // i2s_stop(I2S_USE_NUM);
+    // ESP_LOGE(TAG, "1.1 Create after i2s driver install: RAM left 1 %d", esp_get_free_heap_size());
+}
