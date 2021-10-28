@@ -1,6 +1,7 @@
 {
     "mPythonASR.ASRStart|block": "语音识别 录音 [TIME] 秒后识别一次",
     "mPythonASR.ASRReadResult|block": "语音识别 获取识别结果",
-    "mPythonASR.ASRCompare|block": "语音识别 结果中包含[STR]？"
+    "mPythonASR.ASRCompare|block": "语音识别 结果中包含[STR]？",
+    "mPythonASR.xunfei_shibie|block": "切换为讯飞语音独立账号 APPID[ID] APISecret[SECRET] APIKey[KEY]"
 
 }

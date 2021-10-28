@@ -31,6 +31,25 @@ namespace mPythonASR {
     Generator.addCode([`(String(str_mpythonAsr_result).indexOf(String(${str})) != -1)`, Generator.ORDER_UNARY_POSTFIX]);
 
     }
+    //% block="---"
+    export function noteSep() {
+
+    }
+
+    //% block="change to xunfei APPID[ID] APISecret[SECRET] APIKey[KEY] " blockType="command" 
+    //% ID.shadow="string"  ID.defl=" "
+    //% SECRET.shadow="string"  SECRET.defl=" "
+    //% KEY.shadow="string"  KEY.defl=" "
+    export function xunfei_shibie(parameter: any, block: any) {
+        let id = parameter.ID.code;  
+        let secret = parameter.SECRET.code;
+        let key = parameter.KEY.code;
+
+        Generator.addSetup("xunfei", `mpythonAsr.setXunFeiId(${id},${secret},${key});`);
+       
+  
+   }
+
 
 
 }

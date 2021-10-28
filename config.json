@@ -1,6 +1,6 @@
 {
   "name": {
-    "zh-cn": "WIFI语音识别",
+    "zh-cn": "掌控板WIFI语音识别",
     "en": "ASR module"
   },
   "description": {
@@ -12,17 +12,13 @@
   "license": "MIT",
   "isBoard": false,
   "id": "mPythonASR",
-  "version": "0.2.0",
-  "platform": [
-    "win"
-  ],
+  "version": "0.3.0",
+  "platform": ["win"],
   "asset": {
     "arduinoC": {
       "dir": "arduinoC/",
-      "version": "0.2.0",
-      "board": [
-        "esp32"
-      ],
+      "version": "0.3.0",
+      "board": ["esp32"],
       "main": "main.ts"
     }
   }

@@ -174,6 +174,13 @@ void MPython_ASR::recorderDeinit()
     renderer_deinit();
 }
 
+void MPython_ASR::setXunFeiId(String id,String secret,String key){
+        APPID=id;
+        APISecret=secret;
+        APIKey=key;
+        xunfei_flag=2;
+}
+
 String MPython_ASR::http_getresult(){
     WiFiClient client;
     if (!client.connect("119.23.66.134", 8085)) {
@@ -191,7 +198,13 @@ String MPython_ASR::http_getresult(){
     int content_length = boundary.length()+boundary.length()+content_disposition.length()+content_type.length()+LEN+16;
     data_length +=content_length;
     data_length +="\r\n";
-    client.print("POST /file_upload?deviceid=246F2843EBBC&appid=1&mediatype=2 HTTP/1.0\r\n");
+
+    if(xunfei_flag==2){
+        client.print("POST /xunfei_iat?APPID="+APPID+"&APISecret="+APISecret+"&APIKey="+APIKey+"&mediatype=2 HTTP/1.0\r\n");
+    }else{
+        client.print("POST /file_upload?deviceid=246F2843EBBC&appid=1&mediatype=2 HTTP/1.0\r\n");
+    }
+    
     client.print(data_length);
     client.print("Content-Type: multipart/form-data; boundary=----WebKitFormBoundary0x8f48\r\n");
     client.print("Host: 119.23.66.134\r\n");
@@ -228,7 +241,7 @@ String MPython_ASR::http_getresult(){
 			}else if(Code!=NULL){
                 return Code;
 			}else{
-				return "没听清，请重试";
+				return "识别失败，请重试";
 			}  
         }
     }

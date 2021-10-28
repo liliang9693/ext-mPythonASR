@@ -39,9 +39,14 @@ public :
         void recorderInit();
         void recorderDeinit();
         String getAsrResult(int time);
+        void setXunFeiId(String id,String secret,String key);
 private:
         String http_getresult();
         uint32_t recorder_loudness();
         void audio_recorder_quicksort(uint16_t *buff, uint32_t maxlen, uint32_t begin, uint32_t end);
+        String APPID;
+        String APISecret;
+        String APIKey;
+        uint16_t xunfei_flag=1;
 };
 #endif
